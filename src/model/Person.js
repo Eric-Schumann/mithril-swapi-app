@@ -4,11 +4,12 @@ const Person = {
     result: {},
     homeworld: null,
     homeworldLoaded: false,
-    films: null,
+    films: [],
     loaded: false,
     getPerson: (name) => {
         Person.loaded = false
         Person.homeworldLoaded = false
+        Person.films = []
 
         m.request({
             method: "GET",
@@ -25,13 +26,14 @@ const Person = {
                 Person.homeworldLoaded = true
             })
 
-            m.request({
-                method: "GET",
-                url: Person.result.films
-            }).then(res => {
-                Person.films = res
+            Person.result.films.map(film => {
+                m.request({
+                    method: "GET",
+                    url: film
+                }).then(res => {
+                    Person.films.push(res)
+                })
             })
-
         })
     }
 }

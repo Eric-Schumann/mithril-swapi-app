@@ -2,6 +2,8 @@ const m = require('mithril')
 
 const Person = {
     result: {},
+    species: null,
+    speciesLoaded: false,
     homeworld: null,
     homeworldLoaded: false,
     films: [],
@@ -9,6 +11,7 @@ const Person = {
     getPerson: (name) => {
         Person.loaded = false
         Person.homeworldLoaded = false
+        Person.speciesLoaded
         Person.films = []
 
         m.request({
@@ -24,6 +27,14 @@ const Person = {
             }).then(res => {
                 Person.homeworld = res
                 Person.homeworldLoaded = true
+            })
+
+            m.request({
+                method: "GET",
+                url: Person.result.species
+            }).then(res => {
+                Person.species = res
+                Person.speciesLoaded = true
             })
 
             Person.result.films.map(film => {

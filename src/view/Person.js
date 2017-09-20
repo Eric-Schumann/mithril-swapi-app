@@ -25,8 +25,9 @@ module.exports = {
                                     m("th", "Eye Color"),
                                     m("th", "Hair Color"),
                                     m("th", "Skin Color"),
+                                    m("th", "Mass"),                                    
                                     m("th", "Homeworld"),
-                                    m("th", "Mass"),
+                                    m("th", "Species")
                                 ])
                             ]),
                             m("tbody", [
@@ -37,10 +38,13 @@ module.exports = {
                                     m("td", Person.result.eye_color),
                                     m("td", Person.result.hair_color),
                                     m("td", Person.result.skin_color),
+                                    m("td", Person.result.mass),
                                     m("td.text-center", !Person.homeworldLoaded ? "Loading...." : [
                                         m("a[href=#!/].btn.btn-primary.btn-sm", Person.homeworld.name)
                                     ]),
-                                    m("td", Person.result.mass),
+                                    m("td.text-center", !Person.speciesLoaded ? "Loading...." : [
+                                        m("a[href=#!/].btn.btn-primary.btn-sm", Person.species.name)
+                                    ]),
                                 ])
                             ])
                         ]),
